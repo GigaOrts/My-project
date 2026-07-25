@@ -2,7 +2,7 @@
 {
     internal class GameItemRarities
     {
-        internal static readonly string Common;
-        internal static readonly string Rare;
+        internal static readonly string Common = "Common";
+        internal static readonly string Rare = "Rare";
     }
 }

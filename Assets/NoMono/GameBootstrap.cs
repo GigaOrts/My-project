@@ -22,6 +22,8 @@ namespace Assets.NoMono
                 Debug.Log(item.GetInfo());
             }
             Debug.Log("=== Preparation done ===");
+
+            hero.FindItem(gameItems[Random.Range(0, gameItems.Length)]);
         }
     }
 }
