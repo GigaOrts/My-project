@@ -4,17 +4,19 @@ namespace Assets.MVC
 {
     internal class Bootstrap : MonoBehaviour
     {
-        [SerializeField] private float jumpHeight;
+        [SerializeField] private float _jumpHeight = 3;
+        [SerializeField] private float _jumpDuration = 0.5f;
+        [SerializeField] private JumpView _jumpView;
+
         private JumpController _jumpController;
 
-        //private void Start()
-        //{
-        //    _jumpController = new JumpController();
-        //}
+        private void Start()
+        {
+            PlayerControls playerControls = new PlayerControls();
 
-        //private void Update()
-        //{
-        //    _jumpController.Jump();
-        //}
+            var jumpModel = new JumpModel(_jumpHeight, _jumpDuration);
+            _jumpController = new JumpController(jumpModel, _jumpView);
+            _jumpView.Init(playerControls, _jumpController, jumpModel);
+        }
     }
 }

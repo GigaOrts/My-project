@@ -5,26 +5,24 @@ namespace Assets.MVC
 {
     internal class JumpView : MonoBehaviour
     {
-        private PlayerControls _controls;
+        private PlayerControls _playerControls;
         private JumpController _jumpController;
 
-        void Start()
+        public void Init(
+            PlayerControls playerControls, 
+            JumpController jumpController, 
+            JumpModel jumpModel)
         {
-            var model = new JumpModel();
-            _jumpController = new JumpController(model, this);
+            _playerControls = playerControls;
+            _jumpController = jumpController;
 
-            if (_controls == null)
-            {
-                _controls = new PlayerControls();
-            }
-
-            _controls.Player.Jump.performed += ctx => _jumpController.HandleJump();
-            _controls.Enable();
+            _playerControls.Player.Jump.performed += ctx => _jumpController.HandleJump();
+            _playerControls.Enable();
         }
 
         void OnDestroy()
         {
-            _controls?.Disable();
+            _playerControls?.Disable();
         }
 
         public void PlayJumpAnimation(float height, float duration)

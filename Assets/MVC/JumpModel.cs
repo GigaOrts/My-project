@@ -2,9 +2,15 @@
 {
     internal class JumpModel
     {
-        public float JumpHeight { get; set; } = 3f;
-        public float JumpDuration { get; set; } = 0.5f;
+        public float JumpHeight { get; set; }
+        public float JumpDuration { get; set; }
         public bool IsJumping { get; private set; }
+
+        public JumpModel(float jumpHeight, float jumpDuration)
+        {
+            JumpHeight = jumpHeight;
+            JumpDuration = jumpDuration;
+        }
 
         public void StartJump()
         {
