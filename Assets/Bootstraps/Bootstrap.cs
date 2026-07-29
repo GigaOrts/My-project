@@ -1,28 +1,79 @@
-﻿using UnityEngine;
+﻿using Assets.Features.Ball;
+using Assets.Interfaces;
+using Assets.Features.InputPaddle;
+using UnityEngine;
 
 namespace Assets.Bootstraps
 {
     internal class Bootstrap : MonoBehaviour
     {
-        [SerializeField] private PaddleCongif _paddlePlayerConfig;
-        [SerializeField] private PaddleView _paddlePlayerView;
-        private PaddleModel _paddlePlayerModel;
-        private PaddleModel _paddleAIModel;
-        private PaddleService _paddleService;
+        [SerializeField] private PaddleCongif _paddleConfigPlayer;
+        [SerializeField] private PaddleCongif _paddleConfigAI;
+        [SerializeField] private PaddleView _paddleViewPlayer;
+        [SerializeField] private PaddleView _paddleViewAI;
+        [SerializeField] private BallConfig _ballConfig;
+        [SerializeField] private BallView _ballView;
+        [SerializeField] private float _ballPushForce;
 
-        private BallModel _ball;
+        private PaddleModel _paddleModelPlayer;
+        private PaddleModel _paddleModelAI;
+        private PaddleService _paddleServicePlayer;
+        private PaddleService _paddleServiceAI;
+
+        private BallModel _ballModel;
+        private BallPresenter _ballPresenter;
 
         private void Awake()
         {
-            _paddlePlayerModel = new PaddleModel(_paddlePlayerConfig.Position, _paddlePlayerConfig.Bounds);
-            InputPlayer inputPlayer = new InputPlayer();
-            PaddlePresenter presenterPlayer = new PaddlePresenter(_paddlePlayerModel, _paddlePlayerView);
-            _paddleService = new PaddleService(presenterPlayer, inputPlayer);
+            _ballModel = new BallModel();
+            _ballPresenter = new BallPresenter(_ballModel, _ballView);
+
+            InitPlayer();
+            InitAI();
+        }
+
+        private void Start()
+        {
+            _ballPresenter.Push(_ballPushForce);
         }
 
         private void Update()
         {
-            _paddleService.Tick();
+            _paddleServicePlayer.Tick();
+            _paddleServiceAI.Tick();
+
+            _ballPresenter.Tick();
         }
+
+        private void LateUpdate()
+        {
+            //_paddleServiceAI.Tick();
+
+        }
+        
+        private void InitAI()
+        {
+            _paddleModelAI = new PaddleModel(
+                            _paddleConfigAI.Position,
+                            _paddleConfigAI.Bounds);
+            IPaddleInput inputAI = new InputAI(_ballModel);
+            PaddlePresenter presenterAI = new PaddlePresenter(
+                _paddleModelAI,
+                _paddleViewAI);
+            _paddleServiceAI = new PaddleService(presenterAI, inputAI);
+        }
+
+        private void InitPlayer()
+        {
+            _paddleModelPlayer = new PaddleModel(
+                            _paddleConfigPlayer.Position,
+                            _paddleConfigPlayer.Bounds);
+            IPaddleInput inputPlayer = new InputPlayer();
+            PaddlePresenter presenterPlayer = new PaddlePresenter(
+                _paddleModelPlayer,
+                _paddleViewPlayer);
+            _paddleServicePlayer = new PaddleService(presenterPlayer, inputPlayer);
+        }
+
     }
 }

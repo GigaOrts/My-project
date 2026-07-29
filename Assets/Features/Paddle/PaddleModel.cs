@@ -1,11 +1,10 @@
 ﻿using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace Assets.Bootstraps
 {
     internal class PaddleModel
     {
-        public Vector2 Position { get; set; }
+        public Vector2 Position;
         public PaddleBounds Bounds;
 
         public PaddleModel(Vector2 position, PaddleBounds bounds)

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 097bf1d2a5d373f4a83bb1c2de3e64e4, type: 3}
   m_Name: Paddle Player
   m_EditorClassIdentifier: Assembly-CSharp::Assets.Bootstraps.PaddleCongif
-  Position: {x: -4.3, y: 0}
+  Position: {x: -4.5, y: 0}
   Bounds:
     Bottom: -4.5
     Top: 4.5
