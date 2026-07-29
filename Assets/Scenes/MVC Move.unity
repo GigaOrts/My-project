@@ -427,7 +427,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d315427cbf120f48ad8947f6d5a557a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Assets.MVC_Move.BootstrapMove
-  _speed: 3
+  _moveConfig: {fileID: 11400000, guid: 411044ee0a5c714479598c4cd023a57f, type: 2}
   _moveView: {fileID: 1487131289}
 --- !u!1 &832575517
 GameObject:
